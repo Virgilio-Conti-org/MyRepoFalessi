@@ -1,0 +1,10 @@
+language: java
+jdk: openjdk11
+
+addons:
+ sonarcloud: 
+  organization: "virgilio-conti-org"
+  token: 99c94485a451d5e54f5fa8c4a11124bad3e83b60
+script: 
+- ant build 
+- sonar-scanner
