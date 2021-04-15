@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 
 /**
@@ -23,7 +23,7 @@ public class TickectsProject {
 	
 	public void getMonthlyOccurences(String pathLogGit, String pathFileTickes) throws IOException {
 		int lung;
-		int i=0;
+		int index=0;
 		String lineFileLogGit;
 		String[] mesi={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 		int[] count= {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -42,13 +42,7 @@ public class TickectsProject {
 				 
 				if(lineFileLogGit.startsWith("Date") ) {
 					
-					for(i=0;i<12;i++) {
-						if(lineFileLogGit.contains( mesi[i] )) {
-							
-						   break;	
-						}
-						
-					}//for
+					index=indexMonth(lineFileLogGit, mesi);
 										
 				}//if
 				
@@ -57,7 +51,7 @@ public class TickectsProject {
 						
 						for(int j=0;j<lung;j++) {
 							if(lineFileLogGit.contains( linesTicketsFile.get(j) )) {
-							   count[i]=count[i]+1;	
+							   count[index]=count[index]+1;	
 							   break;
 							}
 					    }//for
@@ -74,8 +68,25 @@ public class TickectsProject {
 				
 		}
 		
-	Logger.getLogger("myLogger").info(Arrays.toString(count));
-	
-	
+	System.out.println(Arrays.toString(count));
+
 	}//fine metodo
+	
+	
+	//restituisce indice array pari al mese trovato nella stringa
+	public int indexMonth(String strToAnalyze, String[] mesi) {
+		int i;
+		for(i=0;i<12;i++) {
+			if(strToAnalyze.contains( mesi[i] )) {
+				
+			   break;	
+			}
+			
+		}//for
+		
+		return i;
+		
+	}//fine metodo
+	
+	
 }
